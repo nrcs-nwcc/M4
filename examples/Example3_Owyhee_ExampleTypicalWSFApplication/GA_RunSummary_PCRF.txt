@@ -1,0 +1,14 @@
+GA Settings
+  Type                  = binary chromosome
+  Population size       = 25
+  Number of Generations = 10
+  Elitism               = TRUE
+  Mutation Chance       = 0.05
+
+Search Domain
+  Var 1 = [,]
+  Var 0 = [,]
+
+GA Results
+  Best Solution : 0 1 0 0 0 1 1 1 1 1 0 0 1 0 0 1 0 0 0 
+

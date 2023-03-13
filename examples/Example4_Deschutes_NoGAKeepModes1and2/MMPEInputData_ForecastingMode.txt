@@ -1,0 +1,2 @@
+IrishTaylorFeb1SWE_in	IrishTaylorWYTDPrecip_in	TangentFeb1SWE_in	ThreeCreeksMeadowFeb1SWE_in	ThreeCreeksMeadowWYTDPrecip_in	DeschutesBenhamFallsJanFlowVolume_kaf
+18	32.2	14.2	9.1	24	84.754

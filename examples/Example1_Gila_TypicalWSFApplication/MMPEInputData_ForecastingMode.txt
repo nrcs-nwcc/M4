@@ -1,0 +1,2 @@
+LookoutMountainWYTDPrecip_in	LookoutMountainMar1SWE_in	SignalPeakWYTDPrecip_in	SignalPeakMar1SWE_in	SilverCreekDivideWYTDPrecip_in	SilverCreekDivideMar1SWE_in
+3.6	0	2.6	0	5.2	1.3

@@ -1,0 +1,6 @@
+"","Hyperparameter_Name","Hyperparameter_Value"
+"1","mANN_config_selection",1
+"2","MCQRNN_config_selection",1
+"3","SVM epsilon",0
+"4","SVM C",64
+"5","SVM gamma",0.2112

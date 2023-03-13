@@ -1,0 +1,9 @@
+"","Postprocessed_Prediction_Bound_Information","Estimated_Value"
+"1","optimal Box-Cox lambda, PCR",4.10225926326142e-05
+"2","Box-Cox space LOOCV RMSE, PCR",0.515951179261921
+"3","optimal Box-Cox lambda, PCANN",4.10225926326142e-05
+"4","Box-Cox space LOOCV RMSE, PCANN",0.510810228032771
+"5","optimal Box-Cox lambda, PCSVM",4.10225926326142e-05
+"6","Box-Cox space LOOCV RMSE, PCSVM",0.363610711562182
+"7","optimal Box-Cox lambda, PCRF",4.10225926326142e-05
+"8","Box-Cox space LOOCV RMSE, PCRF",0.374479844701486

@@ -1,0 +1,20 @@
+Registered S3 method overwritten by 'quantmod':
+  method            from
+  as.zoo.data.frame zoo 
+
+Attaching package: ‘e1071’
+
+The following object is masked from ‘package:qrnn’:
+
+    sigmoid
+
+randomForest 4.6-14
+Type rfNews() to see new features/changes/bug fixes.
+Loading required package: optimx
+
+Attaching package: ‘monmlp’
+
+The following objects are masked from ‘package:qrnn’:
+
+    gam.style, linear, linear.prime
+

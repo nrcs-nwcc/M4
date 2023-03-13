@@ -1,0 +1,2 @@
+BigBend_SNTL_SWE	BuckskinLower_SNTL_SWE	FawnCreek_SNTL_SWE	GranitePeak_SNTL_SWE	JackCreekUpper_SNTL_SWE	LaurelDraw_SNTL_SWE	MudFlat_SNTL_SWE	SouthMtn_SNTL_SWE	TaylorCanyon_SNTL_SWE	BigBend_SNTL_P	BuckskinLower_SNTL_P	FawnCreek_SNTL_P	GranitePeak_SNTL_P	JackCreekUpper_SNTL_P	JacksPeak_SNTL_P	LaurelDraw_SNTL_P	MudFlat_SNTL_P	SouthMtn_SNTL_P
+3.9	7.8	19.9	34.2	15.9	6.4	2.2	23.5	0	10	17.5	22.7	26.4	18.8	25.6	18.6	13.4	26.5

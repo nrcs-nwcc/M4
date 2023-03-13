@@ -1,0 +1,2 @@
+Canyon_SWE	Canyon_P	FisherCreek_SWE	FisherCreek_P	LupineCreek_SWE	MonumentPeak_SWE	MonumentPeak_P	NortheastEntrance_SWE	NortheastEntrance_P	ParkerPeak_SWE	ParkerPeak_P	SylvanLake_SWE	SylvanLake_P	ThumbDivide_SWE	TwoOceanPlateau_SWE	TwoOceanPlateau_P	WhiteMill_SWE	WhiteMill_P
+12.9	14.6	32.6	31.3	7.2	20.5	19.6	7.7	9.8	19.8	16.2	18.6	21.2	14.9	27.4	24.1	21	18.5
