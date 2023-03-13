@@ -2,5 +2,5 @@ The multi-model machine-learning metasystem (M4) is the prototype next-generatio
 
 This initial M4 release to GitHub is a pilot-phase prototype.  It has been extensively documented in the peer-reviewed literature and has experienced retrospective and live operational testing at NRCS, but it hasn’t been integrated yet into NRCS production systems or NRCS institutional protocols for issuing official WSFs.  NRCS encourages applied water resource scientists and engineers and the STEM research community to explore M4 and contribute to developing future versions of it.  The design characteristics of the metasystem might also make it useful for applications beyond environmental prediction.  
 
-Details and caveats are given in the User Manual available here, which also includes three publications describing the method, its rationale, and its performance.
+Details and caveats are given in the [User Manual available here](https://nrcs-nwcc.github.io/UserManual_NRCS_M4.html), which also includes three publications describing the method, its rationale, and its performance.
 For further information or to provide feedback, contact Sean Fleming (sean.fleming@usda.gov) or Beau Uriona (beau.uriona@usda.gov). 
