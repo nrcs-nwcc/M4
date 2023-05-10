@@ -72,7 +72,7 @@
 1           # PCSelection_Frwrd_LR       - For PCR (1=leading mode, 2-second mode, etc.; a combination of up to the first four PCs, determined by what was manually specified or determined by genetic algorithm during model-building for PCR; if more than one mode, separate by commas)
 1           # PCSelection_Frwrd_QR       - For PCQR 
 1,2         # PCSelection_Frwrd_mANN     - For PCANN
-1,2         # PCSelection_Frwrd_MCQRNN   - For PCMCQRNN
+1           # PCSelection_Frwrd_MCQRNN   - For PCMCQRNN
 1           # PCSelection_Frwrd_RF       - For PCRF
 1           # PCSelection_Frwrd_SVM      - For PCSVM
 
@@ -81,7 +81,7 @@
 "0 1 0 1 1 0"          # VariableSelection_Frwrd_LR       - For PCR (set to all the input variables used to build the model if genetic algorithm was not used, or the optimal combination determined by genetic algorithm during model building; separate by spaces as in genetic algorithm run summary file)
 "1 1 0 1 0 0"          # VariableSelection_Frwrd_QR       - For PCQR
 "0 0 1 1 1 1"          # VariableSelection_Frwrd_mANN     - For PCANN
-"0 1 0 1 0 1"          # VariableSelection_Frwrd_MCQRNN   - For MCQRNN
+"0 0 0 1 0 1"          # VariableSelection_Frwrd_MCQRNN   - For MCQRNN
 "0 0 0 1 1 0"          # VariableSelection_Frwrd_RF       - For PCRF
 "0 0 0 1 0 1"          # VariableSelection_Frwrd_SVM      - For PCSVM
 

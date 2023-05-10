@@ -1,6 +1,6 @@
 "","monotonic_ANNs_reversecorrelationflag","reversecorrelationflag_value"
-"1","mANN_PC1_multiply","N"
-"2","mANN_PC2_multiply","N"
+"1","mANN_PC1_multiply","Y"
+"2","mANN_PC2_multiply","Y"
 "3","mANN_PC3_multiply","N"
 "4","mANN_PC4_multiply","N"
 "5","MCQRNN_PC1_multiply","Y"

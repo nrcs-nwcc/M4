@@ -10,5 +10,5 @@ Search Domain
   Var 0 = [,]
 
 GA Results
-  Best Solution : 0 1 0 0 0 0 1 0 0 1 1 0 1 0 1 0 1 0 1 
+  Best Solution : 0 1 0 1 0 1 1 0 0 1 1 0 0 0 0 0 1 0 0 
 

@@ -2,8 +2,8 @@
 "1","optimal Box-Cox lambda, PCR",4.10225926326142e-05
 "2","Box-Cox space LOOCV RMSE, PCR",0.24883198071114
 "3","optimal Box-Cox lambda, PCANN",4.10225926326142e-05
-"4","Box-Cox space LOOCV RMSE, PCANN",0.258169156966201
-"5","optimal Box-Cox lambda, PCSVM",4.10225926326142e-05
-"6","Box-Cox space LOOCV RMSE, PCSVM",0.237054506560788
-"7","optimal Box-Cox lambda, PCRF",4.10225926326142e-05
-"8","Box-Cox space LOOCV RMSE, PCRF",0.240572089207121
+"4","Box-Cox space LOOCV RMSE, PCANN",0.255855944157476
+"5","optimal Box-Cox lambda, PCSVM",0.3422024110911
+"6","Box-Cox space LOOCV RMSE, PCSVM",0.807513821878721
+"7","optimal Box-Cox lambda, PCRF",0.102200197573064
+"8","Box-Cox space LOOCV RMSE, PCRF",0.34143640447214

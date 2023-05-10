@@ -1,0 +1,5 @@
+"","Postprocessed_Prediction_Bound_Switches","Flag_Value"
+"1","Replace PCR_BC prediction intervals with PCR values?","No"
+"2","Replace PCRF_BC prediction intervals with PCRF values?","No"
+"3","Replace PCSVM_BC prediction intervals with PCSVM values?","No"
+"4","Replace PCANN_BC prediction intervals with PCANN values?","No"

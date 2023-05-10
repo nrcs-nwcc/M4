@@ -1,13 +1,14 @@
 # MMPE-Main: R SCRIPT CONTAINING PROTOTYPE MULTI-MODEL PREDICTION ANALTYICS ENGINE
 
 
-# MMPE main program and all custom R functions called by it are Copyright 2017, 2018, 2019 White Rabbit R&D LLC, Corvallis, Oregon USA.
-# Perpetual and non-exclusive license to use the MMPE is granted to Elyon International Inc of Vancouver, Washington USA and the National Water and Climate 
-# Center, Natural Resources Conservation Service, US Department of Agriculture, Portland, Oregon USA.
-# Rights, conditions, limitations, and caveats around the MMPE, and all White Rabbit R&D LLC's work leading to it and otherwise associated with it, and its 
-# use, are as per the 28 November 2016 contract between White Rabbit R&D LLC and Elyon International Inc and other relevant statements of purpose and 
-# limitation including in particular the initial 2017-phase White Rabbit R&D LLC project report and its disclaimer as accepted by the NWCC.
-
+# Original MMPE main program and custom R functions called by it were research prototypes built by White Rabbit R&D LLC, Corvallis, Oregon USA on contract to 
+# Elyon International Inc of Vancouver, Washington USA, in turn on contract to the National Water and Climate Center (NWCC), Natural Resources Conservation Service, 
+# US Department of Agriculture, Portland, Oregon USA. Rights, conditions, limitations, and caveats around the original MMPE, and all White Rabbit R&D LLC's work 
+# leading to it and otherwise associated with it, and its use, are as per the 28 November 2016 contract between White Rabbit R&D LLC and Elyon International Inc 
+# and other relevant statements of purpose and limitation, including the initial 2017-phase White Rabbit R&D LLC project report and its disclaimer as accepted 
+# by the NWCC.  Work on the MMPE (subsequently renamed the multi-model machine-learning metasystem, M4, by the NWCC) following its delivery to the NWCC in 2019, 
+# including further code testing and development, was performed by the NWCC.  This code is solely the responsibility of the NWCC and is posted to GitHub on the 
+# authority of the NWCC.  See also caveats and disclaimer on the GitHub repo, and in the M4 User Manual posted there along with the code.
 
 ### Purpose of main program is to obtain data and run options, manage required activities, and store the outcomes. For inverse runs (model-building using
 ### historical data) the required activities include shipping information off to modules (custom external R functions) for model training, feature creation 
@@ -126,19 +127,19 @@ if (RunTypeFlag == "BUILD") {
   
 library(akima)           # contains interpolation function used for plotting certain results
 
-source("PCR-Module_v11.R")
-source("PCQR-Module_v7.R")
-source("PCANN-Module_v17.R")
-source("PCRF-Module_v3.R")
-source("PCMCQRNN-Module_v5.R")
-source("PCSVM-Module_v6.R")
-source("Diagnostics-Module_v6.R")
-source("AppendEnsemble-Module_v1.R")
-source("InitializeEnsemble-Module_v1.R")
-source("FinalizeEnsemble-Module_v1.R")
-source("PCA-Module_v5.R")
-source("PCA-Graphics-Module_v3.R")
-source("GA-PredictorSelection-Module_v15.R")
+source("PCR-Module_MkII.R")
+source("PCQR-Module_MkII.R")
+source("PCANN-Module_MkII.R")
+source("PCRF-Module_MkII.R")
+source("PCMCQRNN-Module_MkII.R")
+source("PCSVM-Module_MkII.R")
+source("Diagnostics-Module_MkII.R")
+source("AppendEnsemble-Module_MkII.R")
+source("InitializeEnsemble-Module_MkII.R")
+source("FinalizeEnsemble-Module_MkII.R")
+source("PCA-Module_MkII.R")
+source("PCA-Graphics-Module_MkII.R")
+source("GA-PredictorSelection-Module_MkII.R")
   
   
 ###############################################################################################################################################################
@@ -234,6 +235,20 @@ if (GeneticAlgorithmFlag == "Y") {
   PCA(datmatR,PCSelection)
   PCR(PCSelection)
   
+}
+
+# Check for very occasional numerical issue in Box-Cox transform space-based prediction intervals; replace with standard prediction intervals if necessary and flag event for user
+
+PCR_BC_SwitchFlag <- "No"
+TestForInf <- cbind(y90_PCR_BCbased,y70_PCR_BCbased,prd_PCR,y30_PCR_BCbased,y10_PCR_BCbased)
+TestForInf <- is.infinite(TestForInf)
+if (any(TestForInf == TRUE)) {
+  y90_PCR_BCbased <- y90_PCR
+  y70_PCR_BCbased <- y70_PCR
+  y30_PCR_BCbased <- y30_PCR
+  y10_PCR_BCbased <- y10_PCR
+  Ymod_PCR_BC <- Ymod_PCR
+  PCR_BC_SwitchFlag <- "Yes"
 }
 
 # Find, plot, and save PCA-related information for PCR, tidy up workspace:
@@ -375,6 +390,20 @@ if (GeneticAlgorithmFlag == "Y") {
   
 }
 
+# Check for very occasional numerical issue in Box-Cox transform space-based prediction intervals; replace with standard prediction intervals if necessary and flag event for user
+
+PCRF_BC_SwitchFlag <- "No"
+TestForInf <- cbind(y90_PCRF_BCbased,y70_PCRF_BCbased,prd_PCRF,y30_PCRF_BCbased,y10_PCRF_BCbased)
+TestForInf <- is.infinite(TestForInf)
+if (any(TestForInf == TRUE)) {
+  y90_PCRF_BCbased <- y90_PCRF
+  y70_PCRF_BCbased <- y70_PCRF
+  y30_PCRF_BCbased <- y30_PCRF
+  y10_PCRF_BCbased <- y10_PCRF
+  Ymod_PCRF_BC <- Ymod_PCRF
+  PCRF_BC_SwitchFlag <- "Yes"
+}
+
 # Find, plot, and save PCA-related information for PCRF, tidy up workspace:
 
 PCAgraphics("PCRF: PCA eigenspectrum","PCRF: PC time series","PCRF: PCA ordination diagram")
@@ -443,6 +472,20 @@ if (GeneticAlgorithmFlag == "Y") {
   dev.new()                               # without this, plot autogenerated by random forests algorithm appears to overwrite GA convergence plot for RF 
   PCSVM(PCSelection,SVM_config_selection,fixedgamma)
   
+}
+
+# Check for very occasional numerical issue in Box-Cox transform space-based prediction intervals; replace with standard prediction intervals if necessary and flag event for user
+
+PCSVM_BC_SwitchFlag <- "No"
+TestForInf <- cbind(y90_PCSVM_BCbased,y70_PCSVM_BCbased,prd_PCSVM,y30_PCSVM_BCbased,y10_PCSVM_BCbased)
+TestForInf <- is.infinite(TestForInf)
+if (any(TestForInf == TRUE)) {
+  y90_PCSVM_BCbased <- y90_PCSVM
+  y70_PCSVM_BCbased <- y70_PCSVM
+  y30_PCSVM_BCbased <- y30_PCSVM
+  y10_PCSVM_BCbased <- y10_PCSVM
+  Ymod_PCSVM_BC <- Ymod_PCSVM
+  PCSVM_BC_SwitchFlag <- "Yes"
 }
 
 # Find, plot, and save PCA-related information for PCSVM, tidy up workspace:
@@ -566,6 +609,20 @@ if (GeneticAlgorithmFlag == "Y") {
     }
   }
   
+}
+
+# Check for very occasional numerical issue in Box-Cox transform space-based prediction intervals; replace with standard prediction intervals if necessary and flag event for user
+
+PCANN_BC_SwitchFlag <- "No"
+TestForInf <- cbind(y90_PCANN_BCbased,y70_PCANN_BCbased,prd_PCANN,y30_PCANN_BCbased,y10_PCANN_BCbased)
+TestForInf <- is.infinite(TestForInf)
+if (any(TestForInf == TRUE)) {
+  y90_PCANN_BCbased <- y90_PCANN
+  y70_PCANN_BCbased <- y70_PCANN
+  y30_PCANN_BCbased <- y30_PCANN
+  y10_PCANN_BCbased <- y10_PCANN
+  Ymod_PCANN_BC <- Ymod_PCANN
+  PCANN_BC_SwitchFlag <- "Yes"
 }
 
 # Find, plot, and save PCA-related information for PCANN, tidy up workspace:
@@ -1266,6 +1323,12 @@ Estimated_Value <- c(lambda_prd_PCR_LOOCV,LOOCV_RMSE_PCRmodel_BC,lambda_prd_PCAN
 BoxCoxInfo.output <<- data.frame(Postprocessed_Prediction_Bound_Information,Estimated_Value)
 write.csv(BoxCoxInfo.output, file = "BoxCoxInfo.csv")
 
+Postprocessed_Prediction_Bound_Switches  <- c('Replace PCR_BC prediction intervals with PCR values?','Replace PCRF_BC prediction intervals with PCRF values?','Replace PCSVM_BC prediction intervals with PCSVM values?','Replace PCANN_BC prediction intervals with PCANN values?')  # Record whether presence of Inf values in Box-Cox transform space-based prediction intervals required replacement with standard Gaussian stationary prediction intervals
+Flag_Value <- c(PCR_BC_SwitchFlag,PCRF_BC_SwitchFlag,PCSVM_BC_SwitchFlag,PCANN_BC_SwitchFlag)
+BoxCoxSwitches.output <<- data.frame(Postprocessed_Prediction_Bound_Switches,Flag_Value)
+write.csv(BoxCoxSwitches.output, file = "BoxCoxPredictionIntervalsSwitches.csv")
+
+
 
 ###############################################################################################################################################################
 
@@ -1483,9 +1546,9 @@ if (RunTypeFlag == "FORECAST") {
   library(e1071)                # R package to perform SVM modeling
   library(randomForest)         # R package for random forests
   library(monmlp)               # R package for MLP modeling with optional monotonicity constraint
-  source("AppendEnsemble-Module_v1.R")
-  source("InitializeEnsemble-Module_v1.R")
-  source("FinalizeEnsemble-Module_v1.R")
+  source("AppendEnsemble-Module_MkII.R")
+  source("InitializeEnsemble-Module_MkII.R")
+  source("FinalizeEnsemble-Module_MkII.R")
   
   
   #############################################################################################################################################################
@@ -1584,6 +1647,17 @@ if (RunTypeFlag == "FORECAST") {
   LOOCV_RMSE_PCSVMmodel_BC <- BoxCoxInfo[6,3]
   lambda_prd_PCRF_LOOCV <- BoxCoxInfo[7,3]
   LOOCV_RMSE_PCRFmodel_BC <- BoxCoxInfo[8,3]
+  
+  # Read in LOOCV arithmetic-space RMSE for non-Box-Cox prediction intervals around LR, RF, SVM, and mANN
+  
+  PCR_RMSE <- read.table("PCR_StandardPerformanceReportingSuite.csv", header = TRUE, sep=",", stringsAsFactors = FALSE)
+  PCR_RMSE <- as.numeric(PCR_RMSE[2,3])
+  PCRF_RMSE <- read.table("PCRF_StandardPerformanceReportingSuite.csv", header = TRUE, sep=",", stringsAsFactors = FALSE)
+  PCRF_RMSE <- as.numeric(PCRF_RMSE[2,3])
+  PCSVM_RMSE <- read.table("PCSVM_StandardPerformanceReportingSuite.csv", header = TRUE, sep=",", stringsAsFactors = FALSE)
+  PCSVM_RMSE <- as.numeric(PCSVM_RMSE[2,3])
+  PCANN_RMSE <- read.table("PCANN_StandardPerformanceReportingSuite.csv", header = TRUE, sep=",", stringsAsFactors = FALSE)
+  PCANN_RMSE <- as.numeric(PCANN_RMSE[2,3])
   
   # Read in whether input PCs were multiplied by -1 to ensure positive feature-target correlations in the case where monotonicity contraints were enforced for ANNs
   
@@ -1705,6 +1779,11 @@ if (RunTypeFlag == "FORECAST") {
   
   rm(frwrd_PCR_BC,y90_PCR_BC,y70_PCR_BC,y30_PCR_BC,y10_PCR_BC)
   
+  y90_PCR <- frwrd_PCR + (-1.282 * PCR_RMSE)   # find exceedance values under standard assumption of stationary Gaussian distribution with a mean equal to the best estimate and standard deviation equal to the training-phase LOOCV RMSE
+  y70_PCR <- frwrd_PCR + (-0.524 * PCR_RMSE)
+  y30_PCR <- frwrd_PCR + (0.524 * PCR_RMSE)
+  y10_PCR <- frwrd_PCR + (1.282 * PCR_RMSE) 
+  
   
   ############################################################################################################################################################# 
   
@@ -1811,6 +1890,11 @@ if (RunTypeFlag == "FORECAST") {
   
   rm(frwrd_PCRF_BC,y90_PCRF_BC,y70_PCRF_BC,y30_PCRF_BC,y10_PCRF_BC)
   
+  y90_PCRF <- frwrd_PCRF + (-1.282 * PCRF_RMSE)   # find exceedance values under standard assumption of stationary Gaussian distribution with a mean equal to the best estimate and standard deviation equal to the training-phase LOOCV RMSE
+  y70_PCRF <- frwrd_PCRF + (-0.524 * PCRF_RMSE)
+  y30_PCRF <- frwrd_PCRF + (0.524 * PCRF_RMSE)
+  y10_PCRF <- frwrd_PCRF + (1.282 * PCRF_RMSE) 
+  
   
   ############################################################################################################################################################# 
   
@@ -1916,6 +2000,11 @@ if (RunTypeFlag == "FORECAST") {
   y10_PCSVM_BCbased <- InvBoxCox(y10_PCSVM_BC,lambda_prd_PCSVM_LOOCV)
   
   rm(frwrd_PCSVM_BC,y90_PCSVM_BC,y70_PCSVM_BC,y30_PCSVM_BC,y10_PCSVM_BC)
+  
+  y90_PCSVM <- frwrd_PCSVM + (-1.282 * PCSVM_RMSE)   # find exceedance values under standard assumption of stationary Gaussian distribution with a mean equal to the best estimate and standard deviation equal to the training-phase LOOCV RMSE
+  y70_PCSVM <- frwrd_PCSVM + (-0.524 * PCSVM_RMSE)
+  y30_PCSVM <- frwrd_PCSVM + (0.524 * PCSVM_RMSE)
+  y10_PCSVM <- frwrd_PCSVM + (1.282 * PCSVM_RMSE) 
   
   
   ############################################################################################################################################################# 
@@ -2084,6 +2173,11 @@ if (RunTypeFlag == "FORECAST") {
   y10_PCANN_BCbased <- InvBoxCox(y10_PCANN_BC,lambda_prd_PCANN_LOOCV)
   
   rm(frwrd_PCANN_BC,y90_PCANN_BC,y70_PCANN_BC,y30_PCANN_BC,y10_PCANN_BC)
+  
+  y90_PCANN <- frwrd_PCANN + (-1.282 * PCANN_RMSE)   # find exceedance values under standard assumption of stationary Gaussian distribution with a mean equal to the best estimate and standard deviation equal to the training-phase LOOCV RMSE
+  y70_PCANN <- frwrd_PCANN + (-0.524 * PCANN_RMSE)
+  y30_PCANN <- frwrd_PCANN + (0.524 * PCANN_RMSE)
+  y10_PCANN <- frwrd_PCANN + (1.282 * PCANN_RMSE) 
   
   
   ############################################################################################################################################################# 
@@ -2399,23 +2493,18 @@ if (RunTypeFlag == "FORECAST") {
   # WRITE RESULTS
   
   if (Ensemble_flag_frwrd == "Y") {
-    model_names <- c('PCR-BC','PCQR','PCANN-BC','PCMCQRNN','PCSVM-BC','PCRF-BC','ensemble')
-    y90 <- c(y90_PCR_BCbased,y90_PCQR,y90_PCANN_BCbased,y90_PCMCQRNN,y90_PCSVM_BCbased,y90_PCRF_BCbased,y90_ensemble)
-    y70 <- c(y70_PCR_BCbased,y70_PCQR,y70_PCANN_BCbased,y70_PCMCQRNN,y70_PCSVM_BCbased,y70_PCRF_BCbased,y70_ensemble)
-    frwrd_prd <- c(frwrd_PCR,frwrd_PCQR,frwrd_PCANN,frwrd_PCMCQRNN,frwrd_PCSVM,frwrd_PCRF,frwrd_ensemble)
-    y30 <- c(y30_PCR_BCbased,y30_PCQR,y30_PCANN_BCbased,y30_PCMCQRNN,y30_PCSVM_BCbased,y30_PCRF_BCbased,y30_ensemble)
-    y10 <- c(y10_PCR_BCbased,y10_PCQR,y10_PCANN_BCbased,y10_PCMCQRNN,y10_PCSVM_BCbased,y10_PCRF_BCbased,y10_ensemble)
+    ensemble.output <- data.frame(y90_ensemble,y70_ensemble,frwrd_ensemble,y30_ensemble,y10_ensemble)
+    write.csv(ensemble.output, file = "ForwardRunMultiModelEnsembleMeanPrediction.csv")
   }
-  if (Ensemble_flag_frwrd == "N") {
-    model_names <- c('PCR-BC','PCQR','PCANN-BC','PCMCQRNN','PCSVM-BC','PCRF-BC')
-    y90 <- c(y90_PCR_BCbased,y90_PCQR,y90_PCANN_BCbased,y90_PCMCQRNN,y90_PCSVM_BCbased,y90_PCRF_BCbased)
-    y70 <- c(y70_PCR_BCbased,y70_PCQR,y70_PCANN_BCbased,y70_PCMCQRNN,y70_PCSVM_BCbased,y70_PCRF_BCbased)
-    frwrd_prd <- c(frwrd_PCR,frwrd_PCQR,frwrd_PCANN,frwrd_PCMCQRNN,frwrd_PCSVM,frwrd_PCRF)
-    y30 <- c(y30_PCR_BCbased,y30_PCQR,y30_PCANN_BCbased,y30_PCMCQRNN,y30_PCSVM_BCbased,y30_PCRF_BCbased)
-    y10 <- c(y10_PCR_BCbased,y10_PCQR,y10_PCANN_BCbased,y10_PCMCQRNN,y10_PCSVM_BCbased,y10_PCRF_BCbased)
-  }
+  
+  model_names <- c('PCR','PCR-BC','PCQR','PCANN','PCANN-BC','PCMCQRNN','PCSVM','PCSVM-BC','PCRF','PCRF-BC')
+  y90 <- c(y90_PCR,y90_PCR_BCbased,y90_PCQR,y90_PCANN,y90_PCANN_BCbased,y90_PCMCQRNN,y90_PCSVM,y90_PCSVM_BCbased,y90_PCRF,y90_PCRF_BCbased)
+  y70 <- c(y70_PCR,y70_PCR_BCbased,y70_PCQR,y70_PCANN,y70_PCANN_BCbased,y70_PCMCQRNN,y70_PCSVM,y70_PCSVM_BCbased,y70_PCRF,y70_PCRF_BCbased)
+  frwrd_prd <- c(frwrd_PCR,frwrd_PCR,frwrd_PCQR,frwrd_PCANN,frwrd_PCANN,frwrd_PCMCQRNN,frwrd_PCSVM,frwrd_PCSVM,frwrd_PCRF,frwrd_PCRF) # recall PCR and PCR_BC have the same best estimates, etc
+  y30 <- c(y30_PCR,y30_PCR_BCbased,y30_PCQR,y30_PCANN,y30_PCANN_BCbased,y30_PCMCQRNN,y30_PCSVM,y30_PCSVM_BCbased,y30_PCRF,y30_PCRF_BCbased)
+  y10 <- c(y10_PCR,y10_PCR_BCbased,y10_PCQR,y10_PCANN,y10_PCANN_BCbased,y10_PCMCQRNN,y10_PCSVM,y10_PCSVM_BCbased,y10_PCRF,y10_PCRF_BCbased)
   all_frwrd_models.output <- data.frame(model_names,y90,y70,frwrd_prd,y30,y10)
-  write.csv(all_frwrd_models.output, file = "ForwardRunPredictions.csv")
+  write.csv(all_frwrd_models.output, file = "ForwardRunAllModelsPredictions.csv")
   
   
 ###############################################################################################################################################################

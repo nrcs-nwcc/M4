@@ -8,13 +8,13 @@ PredictorOptimization <- function(model_flag) {
   
   library(genalg)
   library(stringr)
-  source("PCA-Module_v5.R")
-  source("PCR-Module_v11.R")
-  source("PCQR-Module_v7.R")
-  source("PCANN-Module_v17.R")
-  source("PCRF-Module_v3.R")
-  source("PCMCQRNN-Module_v5.R")
-  source("PCSVM-Module_v6.R")
+  source("PCA-Module_MkII.R")
+  source("PCR-Module_MkII.R")
+  source("PCQR-Module_MkII.R")
+  source("PCANN-Module_MkII.R")
+  source("PCRF-Module_MkII.R")
+  source("PCMCQRNN-Module_MkII.R")
+  source("PCSVM-Module_MkII.R")
   
   
   # DEFINE FUNCTION TO BE MINIMIZED
