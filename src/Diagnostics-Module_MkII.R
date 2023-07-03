@@ -235,12 +235,14 @@ DIAGNOSTICS <- function(year,N,prd,res,prd_LOOCV,res_LOOCV,obs,y90,y70,y30,y10,p
   
   max_abs_err <- max(abs(res))
   index <- which(abs(res) == max_abs_err)
+  if (length(index) > 1) {index <- "multiple"}
   year_max_abs_err <- year[index]
   rm(index)
   
   percent_res <- 100*res/obs
   max_rel_err <- max(abs(percent_res))
   index <- which(abs(percent_res) == max_rel_err)
+  if (length(index) > 1) {index <- "multiple"}
   year_max_rel_err <- year[index]
   rm(index)
   
