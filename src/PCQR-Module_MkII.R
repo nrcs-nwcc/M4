@@ -34,7 +34,7 @@ PCQR <- function(PCSelection) {
     
     # Fit linear quantile regression model and obtain prediction bounds using a quantile no-crossing constraint
     
-    PCQRmodel <<- gcrq(obs ~ X1, tau = qs, data = dat_model, cv = FALSE) 
+    PCQRmodel <<- gcrq(obs ~ X1, tau = qs, data = dat_model) 
     PCQR_model_summary <<- PCQRmodel$coef
     save(PCQRmodel,file="PCQRmodel.Rdata")
     write.table(PCQR_model_summary,file="PCQR_model_summary.txt",append = FALSE,row.names = TRUE, col.names = TRUE)
@@ -119,7 +119,7 @@ PCQR <- function(PCSelection) {
 
     # Fit linear quantile regression model and obtain prediction bounds using a quantile no-crossing constraint
     
-    PCQRmodel <<- gcrq(obs ~ X1 + X2, tau = qs, data = dat_model, cv = FALSE) 
+    PCQRmodel <<- gcrq(obs ~ X1 + X2, tau = qs, data = dat_model) 
     PCQR_model_summary <<- PCQRmodel$coef
     save(PCQRmodel,file="PCQRmodel.Rdata")
     write.table(PCQR_model_summary,file="PCQR_model_summary.txt",append = FALSE,row.names = TRUE, col.names = TRUE)
@@ -203,7 +203,7 @@ PCQR <- function(PCSelection) {
     
     # Fit linear quantile regression model and obtain prediction bounds using a quantile no-crossing constraint
     
-    PCQRmodel <<- gcrq(obs ~ X1 + X2 + X3, tau = qs, data = dat_model, cv = FALSE) 
+    PCQRmodel <<- gcrq(obs ~ X1 + X2 + X3, tau = qs, data = dat_model) 
     PCQR_model_summary <<- PCQRmodel$coef
     save(PCQRmodel,file="PCQRmodel.Rdata")
     write.table(PCQR_model_summary,file="PCQR_model_summary.txt",append = FALSE,row.names = TRUE, col.names = TRUE)
@@ -274,7 +274,7 @@ PCQR <- function(PCSelection) {
     
     # Fit linear quantile regression model and obtain prediction bounds using a quantile no-crossing constraint
     
-    PCQRmodel <<- gcrq(obs ~ X1 + X2 + X3 + X4, tau = qs, data = dat_model, cv = FALSE) 
+    PCQRmodel <<- gcrq(obs ~ X1 + X2 + X3 + X4, tau = qs, data = dat_model) 
     PCQR_model_summary <<- PCQRmodel$coef
     save(PCQRmodel,file="PCQRmodel.Rdata")
     write.table(PCQR_model_summary,file="PCQR_model_summary.txt",append = FALSE,row.names = TRUE, col.names = TRUE)
